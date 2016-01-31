@@ -18,14 +18,11 @@ DAEMON=/usr/sbin/$NAME
 DAEMON_ARGS="--options args"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME                         
-SOURCE_DIR=/home/vagrant/opt/mychat         
+SOURCE_DIR=/home/vagrant/opt/chat         
 COMMAND=node                             
 SOURCE_NAME=index.js                     
 USER=vagrant                           
-        
-
-
-LOG_FILE=/var/log/$NAME.log
+LOG_FILE=/home/vagrant/log/$NAME.log
 forever=forever
 
 start() {
@@ -42,7 +39,7 @@ start() {
 
 restart() {
     echo -n "Restarting $NAME node instance : "
-	cd SOURCE_DIR
+	cd $SOURCE_DIR
     sudo -H -u $USER $forever restart $SOURCE_NAME
     RETVAL=$?
 }
@@ -55,7 +52,7 @@ status() {
 
 stop() {
     echo -n "Shutting down $NAME node instance : "
-	cd SOURCE_DIR
+	cd $SOURCE_DIR
     sudo -H -u $USER $forever stop $SOURCE_NAME
 }
 
